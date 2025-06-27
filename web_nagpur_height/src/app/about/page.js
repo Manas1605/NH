@@ -34,7 +34,7 @@ const About = () => {
     <div>
       <Header />
       <WhatsApp />
-      <main className="pt-14 pb-12 bg-white">
+      <main className="pt-0 pb-12 bg-white">
         {/* Hero Section */}
         <section className="relative h-64  text-white">
           <Image

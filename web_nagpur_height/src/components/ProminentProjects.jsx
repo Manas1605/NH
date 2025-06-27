@@ -34,13 +34,21 @@ const ProminentProjects = () => {
         <div className="block md:hidden relative w-full flex items-center justify-center">
           <button
             onClick={prevCard}
-            className="absolute left-0 z-10 bg-white/80 text-blue-600 font-bold px-3 py-2 rounded-full shadow-md"
+            className="absolute left-3 z-10 bg-white/80 text-blue-600 font-bold px-3 py-2 rounded-full shadow-md"
             aria-label="Previous"
           >
             ◀
           </button>
 
-          <div className="w-[90%] max-w-sm bg-white rounded-lg shadow-md border transition-all duration-300 overflow-hidden relative">
+          <Link
+            href={`/property/${Properties[currentIndex].id}-${Properties[
+              currentIndex
+            ].title
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+              .replace(/[^\w-]+/g, "")}`}
+            className="w-[90%] max-w-sm bg-white rounded-lg shadow-md border transition-all duration-300 overflow-hidden relative z-0"
+          >
             <img
               src={Properties[currentIndex].images[0]}
               alt={Properties[currentIndex].title}
@@ -60,27 +68,11 @@ const ProminentProjects = () => {
                 {Properties[currentIndex].price}
               </p>
             </div>
-
-            <div className="absolute inset-0 backdrop-blur-sm bg-white/30 opacity-0 active:opacity-100 transition duration-300 z-10 flex items-center justify-center">
-              <Link
-                href={`/property/${Properties[currentIndex].id}-${Properties[
-                  currentIndex
-                ].title
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")
-                  .replace(/[^\w-]+/g, "")}`}
-                passHref
-              >
-                <button className="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition">
-                  View Details
-                </button>
-              </Link>
-            </div>
-          </div>
+          </Link>
 
           <button
             onClick={nextCard}
-            className="absolute right-0 z-10 bg-white/80 text-blue-600 font-bold px-3 py-2 rounded-full shadow-md"
+            className="absolute right-3 z-10 bg-white/80 text-blue-600 font-bold px-3 py-2 rounded-full shadow-md"
             aria-label="Next"
           >
             ▶
