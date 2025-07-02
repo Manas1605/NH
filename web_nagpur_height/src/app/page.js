@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useLenis } from '../lib/useLenis'; // ✅ use your path
+import { useLenis } from '../lib/useLenis'; // ✅ correct path
 
 import Link from 'next/link';
 import Header from '../components/Header';
