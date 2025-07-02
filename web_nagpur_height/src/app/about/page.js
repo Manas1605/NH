@@ -37,24 +37,23 @@ const About = () => {
   return (
     <div>
       <Header />
-
-      {/* Mobile-only floating logo at top-left */}
-      <div className="fixed top-0 left-4 z-50 md:hidden">
-        <Image
-          src="/logos/whitelogo.png"
-          alt="Nagpur Heights Logo"
-          width={65}
-          height={35}
-          className="object-contain"
-          priority
-        />
-      </div>
-
       <WhatsApp />
 
       <main className="pt-0 pb-12 bg-white overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative h-64 text-white">
+          {/* Logo only on mobile, inside hero section */}
+          <div className="absolute top-0 left-4 z-30 md:hidden">
+            <Image
+              src="/logos/whitelogo.png"
+              alt="Nagpur Heights Logo"
+              width={65}
+              height={35}
+              className="object-contain drop-shadow-md"
+              priority
+            />
+          </div>
+
           <Image
             src="/images/back22.jpg"
             alt="Nagpur skyline"
