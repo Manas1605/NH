@@ -1,6 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import PropertyCard from '../components/PropertyCard';
@@ -11,30 +13,26 @@ import { Properties } from '../data/properties.json';
 import WhyChooseUs from '@/components/WhyChooseUs';
 
 const Home = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
+
   const [showAllProperties, setShowAllProperties] = useState(false);
   const displayedProperties = showAllProperties ? Properties : Properties.slice(0, 8);
 
   const toggleFullscreen = () => {
     const element = document.documentElement;
     if (!document.fullscreenElement) {
-      if (element.requestFullscreen) {
-        element.requestFullscreen().catch(err => {
-          console.error('Fullscreen error:', err);
-        });
-      } else if (element.webkitRequestFullscreen) { // Safari
-        element.webkitRequestFullscreen();
-      }
+      element.requestFullscreen?.().catch(err => {
+        console.error('Fullscreen error:', err);
+      });
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { // Safari
-        document.webkitExitFullscreen();
-      }
+      document.exitFullscreen?.();
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
       <Header />
       <WhatsApp />
 
@@ -108,7 +106,6 @@ const Home = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">Featured Properties</h2>
-          {/* View More button - Desktop only */}
           {!showAllProperties && (
             <button 
               onClick={() => setShowAllProperties(true)}
@@ -136,10 +133,21 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Prominent Projects */}
       <ProminentProjects />
-      <AdviceToolsSection />
-      <WhyChooseUs />
-      <Footer />
+
+      {/* Animate only these sections */}
+      <div data-aos="fade-up" data-aos-offset="150">
+        <AdviceToolsSection />
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="100" data-aos-offset="150">
+        <WhyChooseUs />
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="200" data-aos-offset="150">
+        <Footer />
+      </div>
     </div>
   );
 };
